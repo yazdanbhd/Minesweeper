@@ -101,8 +101,22 @@ void initializeBoard(char board[][10], int rows, int columns)
     {
         for (int j = 0; j < columns; j++)
         {
-            board[i][j] = '-';
+            board[i][j] = '#';
         }
     }
 }
 
+void placeMines(char board[][10], int rows, int columns)
+{
+    // declare variables
+    int row;
+    int column;
+
+    // place mines
+    for (int i = 0; i < 10; i++)
+    {
+        row = rand() % 10;
+        column = rand() % 10;
+        board[row][column] = '*';
+    }
+}
