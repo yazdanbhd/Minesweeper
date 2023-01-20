@@ -12,7 +12,7 @@ void initializeBoard(char[][10], int, int);
 void placeMines(char[][10], int, int);
 void placeNumbers(char[][10], int, int);
 void playGame(char[][10], char[][10], int, int);
-
+void playAgain(char[][10], char[][10], int, int);
 
 int main()
 {
@@ -183,6 +183,7 @@ void playGame(char board[][10], char hiddenBoard[][10], int rows, int columns)
     // play game
     while(play)
     {
+        char choice;
         system("cls");
 
         // display board
@@ -206,8 +207,21 @@ void playGame(char board[][10], char hiddenBoard[][10], int rows, int columns)
         // check if mine exists
         if (hiddenBoard[row][column] == '*')
         {
-            cout << "---------- You hit a mine! Game over! ----------" << endl;
-            getch();
+            cout << "---------- You hit a mine! Game over! ----------\n\n" << endl;
+            cout << "Play again? (y/n): ";
+            cin >> choice;
+            if (choice == 'y')
+            {
+                playAgain(board, hiddenBoard, rows, columns);
+            }
+            else if(choice == 'n')
+            {
+                cout << "Thanks for playing!" << endl;
+                play = false;
+            }
+            {
+                play = false;
+            }
             play = false;
         }
 
@@ -228,9 +242,62 @@ void playGame(char board[][10], char hiddenBoard[][10], int rows, int columns)
         // check win condition
         if (count == 90)
         {
-            cout << "---------- You win! ----------" << endl;
-            getch();
+            cout << "---------- You win! ----------\n\n" << endl;
+            cout << "Play again? (y/n): ";
+            cin >> choice;
+            if (choice == 'y')
+            {
+                playAgain(board, hiddenBoard, rows, columns);
+            }
+            else if(choice == 'n')
+            {
+                play = false;
+            }
             play = false;
         }
+    }
+}
+
+void playAgain(char board[][10], char hiddenBoard[][10], int rows, int columns)
+{
+    system("cls");
+
+    // declare variables
+    int choice;
+
+    // display menu
+    cout << "1. Play Again" << endl;
+    cout << "2. Exit" << endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    // validate input
+    while (choice < 1 || choice > 2)
+    {
+        cout << "Invalid choice. Please enter 1 or 2: ";
+        cin >> choice;
+    }
+
+    // play again
+    if (choice == 1)
+    {
+        // initialize boards
+        initializeBoard(board, rows, columns);
+        initializeBoard(hiddenBoard, rows, columns);
+
+        // place mines
+        placeMines(hiddenBoard, rows, columns);
+
+        // place numbers
+        placeNumbers(hiddenBoard, rows, columns);
+
+        // play game
+        playGame(board, hiddenBoard, rows, columns);
+    }
+
+    // exit game
+    else
+    {
+        cout << "Thanks for playing!" << endl;
     }
 }
