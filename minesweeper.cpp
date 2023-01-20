@@ -69,4 +69,40 @@ int main()
     return 0;
 }
 
+// function definitions
+void displayBoard(char board[][10], int rows, int columns)
+{
+    system("cls");
+
+    //display column numbers
+    cout << "  ";
+    for (int i = 0; i < columns; i++)
+    {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    //display board
+    for (int i = 0; i < rows; i++)
+    {
+        cout << i << " ";
+        for (int j = 0; j < columns; j++)
+        {
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void initializeBoard(char board[][10], int rows, int columns)
+{
+    // initialize board
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            board[i][j] = '-';
+        }
+    }
+}
 
