@@ -120,3 +120,55 @@ void placeMines(char board[][10], int rows, int columns)
         board[row][column] = '*';
     }
 }
+
+void placeNumbers(char board[][10], int rows, int columns)
+{
+    // declare variables
+    int count = 0;
+
+    // place numbers
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            if (board[i][j] != '*')
+            {
+                if (i > 0 && j > 0 && board[i - 1][j - 1] == '*')
+                {
+                    count++;
+                }
+                if (i > 0 && board[i - 1][j] == '*')
+                {
+                    count++;
+                }
+                if (i > 0 && j < 9 && board[i - 1][j + 1] == '*')
+                {
+                    count++;
+                }
+                if (j > 0 && board[i][j - 1] == '*')
+                {
+                    count++;
+                }
+                if (j < 9 && board[i][j + 1] == '*')
+                {
+                    count++;
+                }
+                if (i < 9 && j > 0 && board[i + 1][j - 1] == '*')
+                {
+                    count++;
+                }
+                if (i < 9 && board[i + 1][j] == '*')
+                {
+                    count++;
+                }
+                if (i < 9 && j < 9 && board[i + 1][j + 1] == '*')
+                {
+                    count++;
+                }
+                board[i][j] = count + '0';
+                count = 0;
+            }
+        }
+    }
+}
+
