@@ -172,3 +172,65 @@ void placeNumbers(char board[][10], int rows, int columns)
     }
 }
 
+void playGame(char board[][10], char hiddenBoard[][10], int rows, int columns)
+{
+    // declare variables
+    int row;
+    int column;
+    int count = 0;
+    bool play = true;
+
+    // play game
+    while(play)
+    {
+        system("cls");
+
+        // display board
+        displayBoard(board, rows, columns);
+
+        // get row and column
+        cout << "Enter row: ";
+        cin >> row;
+        cout << "Enter column: ";
+        cin >> column;
+
+        // validate input
+        while (row < 0 || row > 9 || column < 0 || column > 9)
+        {
+            cout << "Invalid input. Please enter a row and column between 0 and 9.\nrow: ";
+            cin >> row;
+            cout << "column: ";
+            cin >> column;
+        }
+
+        // check if mine exists
+        if (hiddenBoard[row][column] == '*')
+        {
+            cout << "---------- You hit a mine! Game over! ----------" << endl;
+            getch();
+            play = false;
+        }
+
+            // check if number exists
+        else if (hiddenBoard[row][column] != '#')
+        {
+            board[row][column] = hiddenBoard[row][column];
+            count++;
+        }
+
+        // check if blank space exists
+        else
+        {
+            board[row][column] = hiddenBoard[row][column];
+            count++;
+        }
+
+        // check win condition
+        if (count == 90)
+        {
+            cout << "---------- You win! ----------" << endl;
+            getch();
+            play = false;
+        }
+    }
+}
